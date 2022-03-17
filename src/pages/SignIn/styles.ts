@@ -28,40 +28,6 @@ export const Content = styled.div`
       margin-bottom: 24px;
     }
 
-    input {
-      padding: 10px;
-      background-color: #FFF;
-      border-radius: 5px;
-      width: 100%;
-      border: 2px solid #e0e0e0;
-      color: grey;
-
-      &::placeholder {
-        color: gray;
-      };
-
-      & + input {
-        margin-top: 8px;
-      }
-    }
-
-    button {
-      height: 40px;
-      width: 100%;
-      background-color: var(--emerald-3);
-      border-radius: 5px;
-      padding: 0 10 px;
-      color: var(--white);
-      border: 0;
-      margin-top: 16px;
-      font-weight: 500;
-      transition: background-color 0.2s;
-
-      &:hover{
-        background: ${shade(0.2, '#07cd78ff')};
-      }
-    }
-
     a {
       color: var(--emerald-4);
       display: block;
@@ -96,7 +62,7 @@ export const Content = styled.div`
 
 `;
 
-export const Text = styled.text`
+export const Text = styled.span`
   font-size: 40px;
   margin-top: 20px;
 `
