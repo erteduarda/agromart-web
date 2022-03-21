@@ -1,6 +1,4 @@
-import React, { useCallback, useRef } from 'react';
-
-import api from '../../services/api'
+import React, { useCallback, useRef, useContext } from 'react';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -8,6 +6,7 @@ import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import { AuthContext } from '../../context/AuthContext';
 
 import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi'
 import { Container, Content, Background, Text } from './styles';
@@ -16,13 +15,20 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core'
 import * as Yup from 'yup';
 
-const Signup: React.FC = () => {
+interface SignUpFormData {
+  username: string;
+  email: string;
+  password: string;
+}
+
+const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit = useCallback(async (data: object) => {
+  const { signUp } = useContext(AuthContext);
+
+  const handleSubmit = useCallback(async (data: SignUpFormData) => {
     try{
       formRef.current?.setErrors({});
-
       const schema = Yup.object().shape({
         username: Yup.string().required('Nome obrigatório'),
         email: Yup.string()
@@ -34,10 +40,11 @@ const Signup: React.FC = () => {
       await schema.validate(data, {
         abortEarly: false
       });
-
-      // const response = await api.post('auth/local/register', data);
-
-      // console.log(response);
+      signUp({
+        username: data.username,
+        email: data.email,
+        password: data.password
+      })
 
     }catch(err){
       if(err instanceof Yup.ValidationError){
@@ -47,7 +54,7 @@ const Signup: React.FC = () => {
         console.log(err);
       }
     }
-  }, []);
+  }, [signUp]);
 
   return(
     <Container>
@@ -78,4 +85,4 @@ const Signup: React.FC = () => {
   );
 };
 
-export default Signup;
+export default SignUp;
