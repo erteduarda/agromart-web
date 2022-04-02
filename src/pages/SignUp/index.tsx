@@ -5,7 +5,7 @@ import { FormHandles } from '@unform/core'
 import { Form } from '@unform/web';
 import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi'
 import { Container, Content, Background, Text, AnimationContainer } from './styles';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -24,6 +24,7 @@ const SignUp: React.FC = () => {
 
   const { signUp } = useAuth();
   const { addToast } = useToast();
+  const history = useHistory();
 
   const handleSubmit = useCallback(async (data: SignUpFormData) => {
     try{
@@ -46,6 +47,13 @@ const SignUp: React.FC = () => {
         email: data.email,
         password: data.password
       });
+      
+      addToast({
+        type: 'success',
+        title: 'Cadastro realizado!',
+        description: 'Você já pode fazer seu login no Agromart!'
+      })
+      history.push('/');
 
     }catch(err){
       if(err instanceof Yup.ValidationError){
@@ -58,11 +66,11 @@ const SignUp: React.FC = () => {
       
       addToast({
         type: 'error',
-        title: 'Erro ao criar conta',
-        description: 'Ocorreu um erro ao tentar criar uma conta'
+        title: 'Erro no cadastro.',
+        description: 'Ocorreu um erro ao tentar criar uma conta, tente novamente em alguns instantes.'
       });
     }
-  }, [signUp]);
+  }, [addToast, history]);
 
   return(
     <Container>
