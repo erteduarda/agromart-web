@@ -40,38 +40,29 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const signIn = useCallback(async ({ email, password }) => {
 
-    try{
-      const response = await api.post(`${process.env.REACT_APP_LOGIN_POST}`, {
-        identifier: email,
-        password: password
-      });
-  
-      const { jwt: token, user } = response.data;
+    const response = await api.post(`${process.env.REACT_APP_LOGIN_POST}`, {
+      identifier: email,
+      password: password
+    });
 
-      localStorage.setItem('@AgroMart:token', token);
-      localStorage.setItem('@AgroMart:user', JSON.stringify(user));
-      
-      setData({ token, user });
+    const { jwt: token, user } = response.data;
 
-    }catch(err){
-      console.log(err);
-    }
+    localStorage.setItem('@AgroMart:token', token);
+    localStorage.setItem('@AgroMart:user', JSON.stringify(user));
+    
+    setData({ token, user });
+
   }, []);
 
   const signUp = useCallback(async ({ username, email, password }) => {
 
-    try{
-      const response = await api.post(`${process.env.REACT_APP_SIGNUP_POST}`, {
-        username: username,
-        email: email,
-        password: password
-      });
-  
-      console.log('signUp', response);
+    const response = await api.post(`${process.env.REACT_APP_SIGNUP_POST}`, {
+      username: username,
+      email: email,
+      password: password
+    });
 
-    }catch(err){
-      console.log(err);
-    }
+    console.log('signUp', response);
   }, []);
 
   const signOut = useCallback(() => {

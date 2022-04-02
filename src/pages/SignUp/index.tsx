@@ -6,7 +6,7 @@ import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/auth';
 
 import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi'
 import { Container, Content, Background, Text } from './styles';
@@ -42,7 +42,7 @@ const SignUp: React.FC = () => {
         abortEarly: false
       });
       
-      signUp({
+      await signUp({
         username: data.username,
         email: data.email,
         password: data.password
