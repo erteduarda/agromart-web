@@ -2,6 +2,10 @@ import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
 interface NotificationState {
+  id: number,
+  loja_id: number,
+  title: string,
+  body_text: string
 }
 
 interface BodyNotification {
@@ -37,9 +41,8 @@ const NotificationProvider: React.FC = ({ children }) => {
 
   const getNotifications = useCallback(async () => {
     const response = await api.get(`${process.env.REACT_APP_NOTIFICATION}`)
-    console.log(response.data)
-    // setData()
-
+    // console.log(response.data)
+    setData(response.data)
   }, [])
 
   return(
@@ -60,3 +63,4 @@ function useNotifications(): NotificationContextData {
 }
 
 export { NotificationProvider, useNotifications };
+export type { NotificationState };
