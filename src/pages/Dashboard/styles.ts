@@ -1,12 +1,5 @@
 import styled from "styled-components";
 
-export const DashboardContainer = styled.div`
-  width: 100px;
-  background-color: var(--emerald-2);
-`;
-
-export const Container = styled.div``;
-
 export const Header = styled.header`
   padding: 32px 0;
   background: var(--emerald-4);
@@ -62,3 +55,20 @@ export const Profile = styled.div`
     }
   }
 `;
+
+export const ContentTextArea = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 50px;
+  width: 800px;
+
+  form {
+    flex: 1;
+    padding: 14px;
+  }
+`;
+
+export const HeaderNotifications = styled.div`
+  display: grid
+`

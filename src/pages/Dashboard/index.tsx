@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import Header from '../Header';
-import { DashboardContainer, Container, Header, HeaderContent, Profile } from './styles';
+import { 
+  Header, 
+  HeaderContent, 
+  Profile, 
+  ContentTextArea, 
+  HeaderNotifications 
+} from './styles';
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
+import { useNotifications } from '../../hooks/notifications';
 
 import { FiPower } from 'react-icons/fi';
 
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
-  
+  const { notifications, getNotifications } = useNotifications();
+
+
+  useEffect(()=>{
+    getNotifications()
+  }, [])
+
+  useEffect(()=>{
+    console.log(notifications)
+  }, notifications)
+
   return (
-    <Container>
+    <>
       <Header>
         <HeaderContent>
           <img src={ logoImg } alt="Agromart" />
 
           <Profile>
             <img 
-              src="https://avatars.githubusercontent.com/u/22936236?v=4" 
+              src="https://avatars.githubusercontent.com/u/54074370?v=4" 
               alt={user.username}
             />
             <div>
@@ -31,8 +48,13 @@ const Dashboard: React.FC = () => {
           </button>
         </HeaderContent>
       </Header>
-      <DashboardContainer/>
-    </Container>
+      <ContentTextArea>
+        <HeaderNotifications>
+          {/* renderNotifications */}
+          {/* notifications.map()  */}
+        </HeaderNotifications>
+      </ContentTextArea>
+    </>
   );
 };
 
