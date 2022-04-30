@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components";
 
 export const Header = styled.header`
+  height: 15vh;
   padding: 32px 0;
   background: var(--keppel);
 `;
 
 export const HeaderContent = styled.div`
-  max-width: 1120px;
+  flex: 1;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -16,7 +17,7 @@ export const HeaderContent = styled.div`
   } 
   
   button {
-    margin-left: auto;
+    /* margin-left: auto; */
     background: transparent;
     border: 0;
 
@@ -32,33 +33,7 @@ export const HeaderContent = styled.div`
   }
 `;
 
-export const Profile = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 80px;
 
-  img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-  }
-
-  div {
-    display: flex;
-    flex-direction: column;
-    margin-left: 16px;
-    line-height: 24px;
-
-    span {
-      color: var(--white);
-    }
-
-    strong {
-      color: var(--white);
-      font-weight: bold;
-    }
-  }
-`;
 
 export const ContentTextArea = styled.div`
   display: flex;
@@ -113,27 +88,93 @@ export const NotificationTitle = styled.h3`
   color: var(--emerald-2);
   font-size: sans-serif !important;
 `
+
 export const NotificationForm = styled.div`
+  margin-top: 1rem;
+  width: 45%;
   display: flex;
   flex-direction: column;
 `
 
 export const NotificationFormInput = styled.input`
-  padding-left: 0.5rem;
-  border: 1px solid var(--emerald-4);
-  border-radius: 5px;
+padding-left: 0.5rem;
+border: 1px solid var(--emerald-4);
+border-radius: 5px;
+
+&::placeholder {
+    font-style: italic;
+    color: var(--gray-text);
+  }
 `
 
 export const NotificationFormTextArea = styled.textarea`
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   padding-left: 0.5rem;
   border: 1px solid var(--emerald-4);
   border-radius: 5px;
+  resize: none;
+
+  &::placeholder {
+    font-style: italic;
+    color: var(--gray-text);
+  }
 `
 
 export const NotificationFormButton = styled.button`
+  width: 20%;
   color: var(--white);
   background-color: var(--keppel);
   border: 0px;
-  border-radius: 10px;
+  border-radius: 5px;
+  &:hover{
+    opacity: 0.6;
+  }
 `
 
+export const Container = styled.div`
+  flex: 1;
+  flex-direction: row;
+`
+
+export const MenuButton = styled.button`
+  flex: 0.1;
+  align-items: center;
+`
+
+export const Logo = styled.img`
+  flex: 0.1;
+`
+
+export const PowerButton = styled.button`
+  flex: 0.1;
+`
+
+export const Profile = styled.div`
+  display: flex;
+  flex: 0.7;
+  align-items: center;
+  margin-left: 80px;
+
+  img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    line-height: 24px;
+
+    span {
+      color: var(--white);
+    }
+
+    strong {
+      color: var(--white);
+      font-weight: bold;
+    }
+  }
+`;

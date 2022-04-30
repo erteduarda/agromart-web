@@ -18,7 +18,8 @@ export default createGlobalStyle`
     --light-green: #a5e887ff;
     --emerald-4: #00cb76ff;
     --keppel: #28baa1ff;
-    --emerald-5: #2C8B14
+    --emerald-5: #2C8B14;
+    --gray-text: #BBBBBB;
 
   }
 

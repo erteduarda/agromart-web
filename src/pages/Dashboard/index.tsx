@@ -13,21 +13,27 @@ import {
   NotificationForm,
   NotificationFormInput,
   NotificationFormTextArea,
-  NotificationFormButton 
+  NotificationFormButton,
+  Container,
+  MenuButton,
+  Logo,
+  PowerButton 
 } from './styles';
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
 import { useNotifications, NotificationState } from '../../hooks/notifications';
 import { useToast } from '../../hooks/toast';
+import SideBar from '../../components/SideBar'
+import { IconContext } from 'react-icons';
+import { FiPower, FiMenu } from 'react-icons/fi';
 
-import { FiPower } from 'react-icons/fi';
-
-import './styles.css'
+import './styles.css';
 
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
   const { addToast  } = useToast();
   const [form, setForm] = useState({} as NotificationState);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const { notifications, getNotifications, saveNotification } = useNotifications();
 
@@ -65,28 +71,37 @@ const Dashboard: React.FC = () => {
 
     saveNotification(form)
     getNotifications()
+    addToast({
+      type: 'success',
+      title: 'Mensagem cadastrada!',
+      description: 'A mensagem foi enviada aos usuários.'
+    })
   }
 
   return (
-    <>
+    <Container>
+      <SideBar toggle={openMenu}/>
       <Header>
         <HeaderContent>
-          <img src={ logoImg } alt="Agromart" />
-
+          <Logo src={ logoImg } alt="Agromart" />
+          <IconContext.Provider value={{color: 'white'}}>
+            <MenuButton onClick={() => setOpenMenu(!openMenu)}>
+              <FiMenu size={40}/>
+            </MenuButton>
+          </IconContext.Provider>
           <Profile>
             <img 
-              src="https://avatars.githubusercontent.com/u/54074370?v=4" 
+              src="https://avatars.githubusercontent.com/u/22936236?v=4" 
               alt={user.username}
             />
             <div>
               <span>Bem-vindo,</span>
-            <strong>{user.username}</strong>
+            <strong>{user.username.split(' ')[0]}</strong>
             </div>
           </Profile>
-
-          <button type="button" onClick={ signOut } >
+          <PowerButton type="button" onClick={ signOut } >
             <FiPower />
-          </button>
+          </PowerButton>
         </HeaderContent>
       </Header>
       <ContentTextArea>
@@ -101,12 +116,12 @@ const Dashboard: React.FC = () => {
           </CenterNotifications>
         </NotificationsDashboard>
         <NotificationForm>
-          <NotificationFormInput onChange={inputTitle} placeholder="Título"/>
-          <NotificationFormTextArea onChange={inputDescription} placeholder="Descrição"/>
+          <NotificationFormInput onChange={inputTitle} placeholder="Insira um título..."/>
+          <NotificationFormTextArea onChange={inputDescription} placeholder="Coloque uma descrição..."/>
           <NotificationFormButton onClick={newNotification}>Salvar Notificação</NotificationFormButton>
         </NotificationForm>
       </ContentTextArea>
-    </>
+    </Container>
   );
 };
 
