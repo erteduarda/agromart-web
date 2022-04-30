@@ -41,12 +41,15 @@ export const SideBarContainer = styled.div<{toggled: boolean}>`
 `
 
 export const SideBarContent = styled.div`
+  flex-direction: column;
   display: flex;
   justify-content: center;
   margin-top: 100px;
 `
 
 export const SideBarItem = styled.button`
+  margin-bottom: 1rem;
+  margin-left: 1rem;
   border: none;
   background-color: var(--keppel);
   display: flex;

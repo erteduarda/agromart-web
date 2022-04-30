@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
   const { addToast  } = useToast();
   const [form, setForm] = useState({} as NotificationState);
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(true);
 
   const { notifications, getNotifications, saveNotification } = useNotifications();
 
