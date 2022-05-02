@@ -12,6 +12,7 @@ interface AuthState {
   user: User;
 }
 
+
 interface SignInCredentials {
   email: string;
   password: string;
@@ -25,6 +26,7 @@ interface SignUpCredentials {
 
 interface AuthContextData {
   user: User;
+  // assinantes: SubscribeType;
   signIn(credentials: SignInCredentials): Promise<void>;
   signUp(credentials: SignUpCredentials): Promise<void>;
   signOut(): void;
@@ -45,7 +47,6 @@ const AuthProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ email, password }) => {
-
     const response = await api.post(`${process.env.REACT_APP_LOGIN_POST}`, {
       identifier: email,
       password: password
@@ -53,6 +54,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
     const { jwt: token, user } = response.data;
 
+    
     localStorage.setItem('@AgroMart:token', token);
     localStorage.setItem('@AgroMart:user', JSON.stringify(user));
     
@@ -73,6 +75,8 @@ const AuthProvider: React.FC = ({ children }) => {
   const signOut = useCallback(() => {
     localStorage.removeItem('@AgroMart:token');
     localStorage.removeItem('@AgroMart:user');
+
+    delete api.defaults.headers.authorization;
 
     setData({} as AuthState);
   }, []);

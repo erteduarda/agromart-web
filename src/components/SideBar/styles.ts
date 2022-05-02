@@ -28,7 +28,7 @@ export const SideBarContainer = styled.div<{toggled: boolean}>`
     }
   }
 
-  background-color: var(--emerald);
+  background-color: var(--emerald-2);
   height: 85vh;
   width: 300px;
   position: absolute;
@@ -44,7 +44,7 @@ export const SideBarContent = styled.div`
   flex-direction: column;
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 10px;
 `
 
 export const SideBarItem = styled.button`

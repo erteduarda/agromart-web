@@ -89,8 +89,17 @@ export const NotificationTitle = styled.h3`
   font-size: sans-serif !important;
 `
 
+export const NewNotificationTitle = styled.h3`
+  align-self: start;
+  font-size: 1.1rem;
+  color: var(--emerald-2);
+  font-size: sans-serif !important;
+  font-weight: bold;
+  margin-bottom: 1rem;
+`
+
 export const NotificationForm = styled.div`
-  margin-top: 1rem;
+  margin-top: 3.5rem;
   width: 45%;
   display: flex;
   flex-direction: column;
