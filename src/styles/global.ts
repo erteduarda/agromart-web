@@ -18,6 +18,8 @@ export default createGlobalStyle`
     --light-green: #a5e887ff;
     --emerald-4: #00cb76ff;
     --keppel: #28baa1ff;
+    --emerald-5: #2C8B14;
+    --gray-text: #BBBBBB;
 
   }
 
@@ -34,7 +36,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, button {
+  body, input, button, textarea {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
   }
