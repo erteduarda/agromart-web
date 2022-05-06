@@ -8,7 +8,6 @@ const api = axios.create({
 
 const token = localStorage.getItem('@AgroMart:token')
 
-console.log("TOKEN NO API", token);
 if(token) {
   // api.interceptors.request.use(async config => ({
   //   ...config,
