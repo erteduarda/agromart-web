@@ -41,7 +41,6 @@ const NotificationProvider: React.FC = ({ children }) => {
 
   const getNotifications = useCallback(async () => {
     const response = await api.get(`${process.env.REACT_APP_NOTIFICATION}`)
-    // console.log(response.data)
     setData(response.data)
   }, [])
 

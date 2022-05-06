@@ -53,8 +53,10 @@ const AuthProvider: React.FC = ({ children }) => {
     });
 
     const { jwt: token, user } = response.data;
+    console.log("TOKEN NO auth", token);
 
-    
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
     localStorage.setItem('@AgroMart:token', token);
     localStorage.setItem('@AgroMart:user', JSON.stringify(user));
     

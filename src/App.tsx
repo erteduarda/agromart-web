@@ -5,6 +5,8 @@ import Routes from "./routes";
 
 import AppProvider from './hooks';
 
+import 'dotenv/config'
+
 const App: React.FC = () => {
   return(
     <BrowserRouter>

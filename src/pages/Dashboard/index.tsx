@@ -27,13 +27,10 @@ import { useToast } from '../../hooks/toast';
 import SideBar from '../../components/SideBar'
 import { IconContext } from 'react-icons';
 import { FiPower, FiMenu } from 'react-icons/fi';
-import api from '../../services/api'
 
 import './styles.css';
 
 const Dashboard: React.FC = () => {
-  api.defaults.headers.authorization = `Bearer ${localStorage.getItem('@AgroMart:token')}`;
-
   const { signOut, user } = useAuth();
   const { addToast  } = useToast();
   const [form, setForm] = useState({} as NotificationState);
@@ -123,7 +120,7 @@ const Dashboard: React.FC = () => {
           <NewNotificationTitle>Novas Notificações</NewNotificationTitle>
           <NotificationFormInput onChange={inputTitle} placeholder="Insira um título..."/>
           <NotificationFormTextArea onChange={inputDescription} placeholder="Coloque uma descrição..."/>
-          <NotificationFormButton onClick={newNotification}>Salvar Notificação</NotificationFormButton>
+          <NotificationFormButton onClick={newNotification}>Enviar Notificação</NotificationFormButton>
         </NotificationForm>
       </ContentTextArea>
     </Container>
