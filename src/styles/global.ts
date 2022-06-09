@@ -1,51 +1,51 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const GlobalStyle = createGlobalStyle`
-  :root{
+export default createGlobalStyle`
+
+:root{
     --background: #f0f2f5;
     --blue: #5429CC;
-    --green: #1cab94;
-    --green-light: #87e186;
+    --green: #3dad37;
+    --green-light: #73ed6d;
     --text-title: #363F5F;
-    --shape: #FFFFFF;
+
+    //Paleta de cores Agromart
+    --white: #ffffffff;
+    --emerald: #5dd685ff;
+    --emerald-2: #27cf83ff;
+    --granny-smith-apple: #93e298ff;
+    --emerald-3: #07cd78ff;
+    --light-green: #a5e887ff;
+    --emerald-4: #00cb76ff;
+    --keppel: #28baa1ff;
+    --emerald-5: #2C8B14;
+    --gray-text: #BBBBBB;
+
   }
 
-  * {
+  *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    outline: 0;
   }
 
-  html {
-    @media (max-width: 1080px){
-      font-size: 93.75%;
-    }
-
-    @media (max-width: 720px){
-      font-size: 87.5%;
-    }
-  }
-
-  body {
-    background-color: var(--background);
+  body{
+    background: #f5f5f5;
+    color: #000;
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, textarea, button {
+  body, input, button, textarea {
     font-family: 'Poppins', sans-serif;
-    font-weight: 400;
+    font-size: 16px;
   }
 
   h1, h2, h3, h4, h5, h6, strong {
-    font-weight: 600;
+    font-weight: 500;
   }
 
   button {
     cursor: pointer;
   }
-
-  [disabled] {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-`
+`;

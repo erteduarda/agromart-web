@@ -1,11 +1,20 @@
-import { Header } from "./components/Header";
-import { GlobalStyle } from "./styles/global";
+import React from "react";
+import GlobalStyle from "./styles/global";
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./routes";
 
-export function App() {
-  return (
-    <>
-      <Header/>
+import AppProvider from './hooks';
+
+import 'dotenv/config'
+
+const App: React.FC = () => {
+  return(
+    <BrowserRouter>
+      <AppProvider>
+        <Routes/>
+      </AppProvider>  
       <GlobalStyle/>
-    </>
-  );
-}
+    </BrowserRouter>
+)}; 
+
+export default App;
