@@ -1,0 +1,24 @@
+name: Portability Tests
+on:
+  push:
+    branches: [ main ]
+jobs:
+  cross-browser:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - run: npm ci
+      - name: Run on ${{ matrix.browser }}
+        run: |
+          npx playwright test --project=${{ matrix.browser }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: portability-${{ matrix.browser }}
+          path: test-results/
