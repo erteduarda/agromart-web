@@ -1,5 +1,6 @@
-import { defineConfig, devices } from '@playwright/test';
-export default defineConfig({
+const { defineConfig, devices } = require('@playwright/test');
+
+module.exports = defineConfig({
   timeout: 60000,
   use: { headless: true, viewport: { width: 1280, height: 720 } },
   projects: [

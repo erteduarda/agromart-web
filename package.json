@@ -20,6 +20,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@playwright/test": "^1.53.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -30,14 +31,16 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.23",
     "@types/yup": "^0.29.13",
-    "typescript": "^4.4.2",
-    "dotenv": "^16.0.0"
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.0",
+    "typescript": "^4.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:e2e": "cross-env BASE_URL=http://localhost:3000 playwright test --config=test/playwright/playwright.config.js"
   },
   "fallback": {
     "fs": false,
