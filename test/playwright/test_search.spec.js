@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
 
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+
 test('Pesquisa de produto em até 2s', async ({ page }) => {
-  await page.goto('https://agromart.example.com/search');
+  await page.goto(`${BASE_URL}/search`);
   const start = Date.now();
   await page.fill('input[name="q"]', 'tratores');
   await page.click('button[type="submit"]');

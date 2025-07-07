@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
 
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
+
 test('Fluxo de compra básico', async ({ page }) => {
-  await page.goto('https://agromart.example.com');
+  await page.goto(BASE_URL);
   await page.fill('input[name="search"]', 'fertilizante');
   await page.click('button[type="submit"]');
   await page.click('.product-item >> nth=0');

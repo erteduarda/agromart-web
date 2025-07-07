@@ -1,0 +1,86 @@
+name: Quality Checks
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+      # 1. Checa o código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Instala o Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      # 3. Instala dependências do projeto
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. (Opcional) Executa ESLint
+      - name: Run ESLint
+        run: |
+          if [ -f ./node_modules/.bin/eslint ]; then
+            npx eslint src || true
+          else
+            echo "ESLint não encontrado, pulando etapa."
+          fi
+
+      # 5. (Opcional) Executa testes unitários
+      - name: Run unit tests
+        run: |
+          if [ -f ./node_modules/.bin/react-scripts ]; then
+            npm test -- --watchAll=false --ci --reporters=default --reporters=jest-junit
+          else
+            echo "Test runner não encontrado, pulando etapa."
+          fi
+        continue-on-error: true
+
+      # 6. Sobe o servidor local em background
+      - name: Start local server
+        run: |
+          nohup npm start &
+          sleep 60 # Aguarda o servidor subir
+
+      # 7. Executa Lighthouse CI
+      - name: Run Lighthouse CI
+        run: |
+          npm install -g @lhci/cli
+          lhci autorun --collect.url=http://localhost:3000 || true
+        continue-on-error: true
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: .lighthouseci/
+
+      # 8. Executa OWASP ZAP Baseline Scan
+      - name: Run OWASP ZAP Baseline Scan
+        uses: zaproxy/action-baseline@v0.10.0
+        with:
+          target: 'http://localhost:3000'
+          fail_action: false
+      - name: Upload ZAP report
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-report
+          path: report.html
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            junit.xml
+            coverage/
+
